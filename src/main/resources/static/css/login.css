@@ -1,0 +1,11 @@
+/*登录页的半透明层的样式*/
+.loginDiv {
+	width: 100%;
+	max-height: 450px;
+	max-width: 450px;
+	background-color: rgba(255, 255, 255, 0.85);
+	margin: 200px auto;
+	border-radius: 15px;
+	color: #666666;
+	padding: 15px;
+}
