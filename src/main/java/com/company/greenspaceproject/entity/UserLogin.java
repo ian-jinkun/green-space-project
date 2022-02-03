@@ -57,4 +57,16 @@ public class UserLogin implements Serializable {
     public void setSalt(int salt) {
         this.salt = String.valueOf(salt);
     }
+
+    @Override
+    public String toString() {
+        return "UserLogin{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", locked=" + locked +
+                ", login_attempts=" + login_attempts +
+                ", salt='" + salt + '\'' +
+                '}';
+    }
 }

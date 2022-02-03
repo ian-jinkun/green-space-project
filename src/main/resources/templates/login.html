@@ -74,7 +74,7 @@
 						<label class="col-md-3 control-label"></label>
 						<div class="col-md-8">
 							<input id="btn-login" class="btn btn-primary" th:value="#{login.btn}" type="button" value="Sign in" />
-							<span class="pull-right"><small th:text="#{login.notRegis}"></small><a href="register.html" th:text="#{login.regis}"></a></span>
+							<span class="pull-right"><small th:text="#{login.notRegis}"></small><a href="/users/register.html" th:text="#{login.regis}"></a></span>
 						</div>
 					</div>
 				</form>
@@ -100,15 +100,13 @@
 					success: function (json){
 						if(json.state === 200) {
 							alert("Login Success");
-							$.cookie("avatar", json.data.avatar, {expires: 7});
-							location.href = "index.html"
-							// add save user's photo to cookie
+							location.href = "/web/index.html"
 						}
 						else
 							alert("Login Failed: " + json.message)
 					},
 					error: function (xhr){
-						alert("Unknown Server Error!!!");
+						alert("Unknown Server Error!");
 					}
 				})
 

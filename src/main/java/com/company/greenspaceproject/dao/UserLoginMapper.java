@@ -2,8 +2,10 @@ package com.company.greenspaceproject.dao;
 
 import com.company.greenspaceproject.entity.UserLogin;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 @Mapper
+@Repository
 public interface UserLoginMapper {
     /**
      * @param email

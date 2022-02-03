@@ -6,8 +6,10 @@ import com.company.greenspaceproject.service.IUserService;
 import com.company.greenspaceproject.service.ex.PasswordNotMatchException;
 import com.company.greenspaceproject.service.ex.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
+@Service
 public class UserServiceImpl implements IUserService {
     @Autowired
     private UserLoginMapper userLoginMapper;
@@ -20,12 +22,18 @@ public class UserServiceImpl implements IUserService {
             throw new UserNotFoundException();
         }
 
-        String userPassword = getMD5Password(password, userLogin.getSalt());
-        if(!userPassword.equals(userLogin.getPassword()))
+        if(!password.equals(userLogin.getPassword()))
             // throw username or password don't match exception
         {
             throw new PasswordNotMatchException();
         }
+
+//        String userPassword = getMD5Password(password, userLogin.getSalt());
+//        if(!userPassword.equals(userLogin.getPassword()))
+//            // throw username or password don't match exception
+//        {
+//            throw new PasswordNotMatchException();
+//        }
         return userLogin;
     }
 

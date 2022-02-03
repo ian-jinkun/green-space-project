@@ -3,9 +3,12 @@
 
 <mapper namespace="com.company.greenspaceproject.dao.UserLoginMapper">
 
+    <resultMap type="com.company.greenspaceproject.entity.UserLogin" id="UserLoginMap">
+    </resultMap>
+
     <!--id：Represents the method "findUserByEmail" in the UserLoginMapper interface-->
-    <select id="findUserByEmail" resultType="com.company.greenspaceproject.entity.UserLogin">
-        SELECT * FROM user_login WHERE email = #{email}
+    <select id="findUserByEmail" resultMap="UserLoginMap">
+        SELECT email, password FROM green_space_club.user_login WHERE email = #{email}
     </select>
 
 </mapper>

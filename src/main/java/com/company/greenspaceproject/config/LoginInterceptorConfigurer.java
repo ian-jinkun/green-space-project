@@ -29,9 +29,11 @@ public class LoginInterceptorConfigurer implements WebMvcConfigurer {
         patterns.add("/images/**");
         patterns.add("/js/**");
         patterns.add("/users/login");
+        patterns.add("/users/register.html");
+        patterns.add("/users/register");
         patterns.add("/");
         patterns.add("/web/index.html");
-
+        patterns.add("/web/main.html");
         // register interceptor complete
         interceptorRegistry.addInterceptor(interceptor).addPathPatterns("/**").excludePathPatterns(patterns); // Intercept URLs /** means all URLs.
 

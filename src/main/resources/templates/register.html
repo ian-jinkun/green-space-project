@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!--edge browser H5 compatible Settings-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit" />
+    <title>Green Space Club</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--import file-->
+    <script type="text/jsx"  src="/bootstrap3/js/holder.js"></script>
+    <link href="/bootstrap3/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <script type="text/jsx" src="/bootstrap3/jquery-1.9.1.min.js"></script>
+    <script type="text/jsx" src="/bootstrap3/js/bootstrap.js"></script>
+    <!-- font -->
+    <link rel="stylesheet" href="/bootstrap3/font-awesome-4.7.0/css/font-awesome.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/top.css" />
+    <link rel="stylesheet" type="text/css" href="/css/index.css" />
+    <link rel="stylesheet" type="text/css" href="/css/layout.css" />
+    <link rel="stylesheet" type="text/css" href="/css/login.css" />
+    <link rel="stylesheet" type="text/css" href="/css/footer.css" />
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+    <script src="/bootstrap3/js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/autoLogin.js" type="text/javascript"></script>
+</head>
+<body>
+<!--header-->
+<header class="header">
+    <img src="/images/index/logo.png" width = "60" height = "60" alt="" />
+    <span class="pull-right"><small th:text="#{login.welcome}"></small><b> Green Space Club</b></span>
+</header>
+<!--main body-->
+<div class="container mycontent text-left">
+    <!--transparent layer -->
+    <div class="loginDiv">
+        <p th:text="#{register.tip}">Please sign up</p>
+        <!--form start-->
+        <form id="form-reg" class="form-horizontal" role="form">
+            <!--email-->
+            <div class="form-group">
+                <label class="col-md-3 control-label"th:text="#{login.email}"></label>
+                <div class="col-md-8">
+                    <input name="username" type="text" class="form-control" th:placeholder="#{login.enterEmail}">
+                </div>
+            </div>
+            <!--password-->
+            <div class="form-group">
+                <label class="col-md-3 control-label"th:text="#{login.password}"></label>
+                <div class="col-md-8">
+                    <input name="password" type="text" class="form-control" th:placeholder="#{login.enterPassword}">
+                </div>
+            </div>
+            <!--confirm password -->
+            <div class="form-group">
+                <label class="col-md-3 control-label" th:text="#{register.confirmPassword}"></label>
+                <div class="col-md-8">
+                    <input type="text" class="form-control" th:placeholder="#{register.repeatPassword}">
+                </div>
+            </div>
+            <!--submit-->
+            <div class="form-group">
+                <label class="col-md-3 control-label"></label>
+                <div class="col-md-8">
+                    <input id="btn-login" class="btn btn-primary" th:value="#{register.signup}" type="button" value="Sign up" />
+                    <span class="pull-right"><small th:text="#{register.haveAccount}"></small><a href="register.html" th:text="#{register.signin}"></a></span>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!--footer start-->
+<footer class="footer">
+    <!-- page bottom #footer -->
+    <div class="col-md-12 text-center bottom">
+        Copyright © 2021-2022<a target="_blank"> Green Space Club</a>
+    </div>
+</footer>
+<!--footer end-->
+<script type="text/javascript">
+    // listen to login button
+    $("#btn-login").click(function () {
+        //2. send ajax() to finish registration function
+        $.ajax({
+            url: "/users/login",
+            type: "POST",
+            data: $("#form-login").serialize(),
+            dataType: "JSON",
+            success: function (json){
+                if(json.state === 200) {
+                    alert("Login Success");
+                    location.href = "/web/index.html"
+                }
+                else
+                    alert("Login Failed: " + json.message)
+            },
+            error: function (xhr){
+                alert("Unknown Server Error!");
+            }
+        })
+
+    })
+
+</script>
+</body>
+</html>
