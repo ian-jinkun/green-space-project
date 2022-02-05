@@ -1,2 +1,4 @@
-package com.company.greenspaceproject.dao;public class MemberMapper {
+package com.company.greenspaceproject.dao;
+
+public interface MemberMapper {
 }
