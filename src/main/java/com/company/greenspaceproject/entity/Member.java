@@ -3,7 +3,7 @@ package com.company.greenspaceproject.entity;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class member implements Serializable {
+public class Member implements Serializable {
     int mid;
     int uid;
     String firstName;
@@ -36,8 +36,8 @@ public class member implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof member)) return false;
-        member member = (member) o;
+        if (!(o instanceof Member)) return false;
+        Member member = (Member) o;
         return getMid() == member.getMid() && getUid() == member.getUid() && getGender() == member.getGender() && Objects.equals(getFirstName(), member.getFirstName()) && Objects.equals(getLastName(), member.getLastName()) && Objects.equals(getMiddleName(), member.getMiddleName()) && Objects.equals(getCountry(), member.getCountry()) && Objects.equals(getState(), member.getState()) && Objects.equals(getCity(), member.getCity()) && Objects.equals(getZip(), member.getZip()) && Objects.equals(getAddress(), member.getAddress());
     }
 

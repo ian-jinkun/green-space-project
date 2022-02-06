@@ -10,16 +10,20 @@ import java.util.List;
 
 @RestController
 @RequestMapping("districts")
-public class DistrictController {
+public class DistrictController extends BaseController{
     @Autowired
     private IDistrictService districtService;
 
     @RequestMapping({"/", ""})
     public JsonResult<List<String>> getStates(String country){
+        List<String> data = districtService.getStatesByCountry(country);
 
-        return null;
+        return new JsonResult<List<String>>(OK, data);
+
     }
     public JsonResult<List<String>> getCities(String state){
-        return null;
+        List<String> data = districtService.getCitiesByState(state);
+
+        return new JsonResult<List<String>>(OK, data);
     }
 }
