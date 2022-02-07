@@ -14,13 +14,14 @@ public class DistrictController extends BaseController{
     @Autowired
     private IDistrictService districtService;
 
-    @RequestMapping({"/", ""})
+    @RequestMapping("get_states")
     public JsonResult<List<String>> getStates(String country){
         List<String> data = districtService.getStatesByCountry(country);
 
         return new JsonResult<List<String>>(OK, data);
 
     }
+    @RequestMapping("get_cities")
     public JsonResult<List<String>> getCities(String state){
         List<String> data = districtService.getCitiesByState(state);
 

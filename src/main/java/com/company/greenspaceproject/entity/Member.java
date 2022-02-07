@@ -4,12 +4,12 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class Member implements Serializable {
-    int mid;
-    int uid;
+    Integer mid;
+    Integer uid;
     String firstName;
     String lastName;
     String middleName;
-    int gender;
+    Integer gender;
     String country;
     String state;
     String city;
@@ -38,7 +38,7 @@ public class Member implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Member)) return false;
         Member member = (Member) o;
-        return getMid() == member.getMid() && getUid() == member.getUid() && getGender() == member.getGender() && Objects.equals(getFirstName(), member.getFirstName()) && Objects.equals(getLastName(), member.getLastName()) && Objects.equals(getMiddleName(), member.getMiddleName()) && Objects.equals(getCountry(), member.getCountry()) && Objects.equals(getState(), member.getState()) && Objects.equals(getCity(), member.getCity()) && Objects.equals(getZip(), member.getZip()) && Objects.equals(getAddress(), member.getAddress());
+        return Objects.equals(getMid(), member.getMid()) && Objects.equals(getUid(), member.getUid()) && getGender() == member.getGender() && Objects.equals(getFirstName(), member.getFirstName()) && Objects.equals(getLastName(), member.getLastName()) && Objects.equals(getMiddleName(), member.getMiddleName()) && Objects.equals(getCountry(), member.getCountry()) && Objects.equals(getState(), member.getState()) && Objects.equals(getCity(), member.getCity()) && Objects.equals(getZip(), member.getZip()) && Objects.equals(getAddress(), member.getAddress());
     }
 
     @Override
@@ -46,7 +46,7 @@ public class Member implements Serializable {
         return Objects.hash(getMid(), getUid(), getFirstName(), getLastName(), getMiddleName(), getGender(), getCountry(), getState(), getCity(), getZip(), getAddress());
     }
 
-    public int getMid() {
+    public Integer getMid() {
         return mid;
     }
 
@@ -54,7 +54,7 @@ public class Member implements Serializable {
         this.mid = mid;
     }
 
-    public int getUid() {
+    public Integer getUid() {
         return uid;
     }
 
@@ -86,7 +86,7 @@ public class Member implements Serializable {
         this.middleName = middleName;
     }
 
-    public int getGender() {
+    public Integer getGender() {
         return gender;
     }
 

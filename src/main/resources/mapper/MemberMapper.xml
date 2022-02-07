@@ -13,6 +13,19 @@
         INSERT INTO green_space_club.member (uid, first_name, last_name, middle_name, gender, country, state, city, zip, address)
         VALUES (#{uid}, #{firstName}, #{lastName}, #{middleName}, #{gender}, #{country}, #{state}, #{city}, #{zip}, #{address})
     </insert>
+    <update id="updateMember">
+        UPDATE green_space_club.member
+        SET first_name = #{firstName},
+            last_name = #{lastName},
+            middle_name = #{middleName},
+            gender = #{gender},
+            country = #{country},
+            state = #{state},
+            city = #{city},
+            zip = #{zip},
+            address = #{address}
+        WHERE mid = #{mid}
+    </update>
     <select id="findMemberByUid" resultMap="MemberEntityMap">
         SELECT * FROM member WHERE uid = #{uid}
     </select>
