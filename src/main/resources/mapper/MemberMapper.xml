@@ -27,7 +27,7 @@
         WHERE mid = #{mid}
     </update>
     <select id="findMemberByUid" resultMap="MemberEntityMap">
-        SELECT * FROM member WHERE uid = #{uid}
+        SELECT * FROM green_space_club.member WHERE uid = #{uid}
     </select>
 
 </mapper>

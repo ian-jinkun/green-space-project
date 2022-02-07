@@ -59,4 +59,9 @@ public class MemberMapperTest {
         System.out.println(memberMapper.updateMember(member.getMid(), member.getFirstName(), member.getLastName(), member.getMiddleName(), member.getGender(),member.getCountry(),
                 member.getState(), member.getCity(), member.getZip(), member.getAddress()));
     }
+
+    @Test
+    void findMemberByUid() {
+        System.out.println(memberMapper.findMemberByUid(-1));
+    }
 }
