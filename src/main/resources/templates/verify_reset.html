@@ -35,36 +35,30 @@
 <div class="container mycontent text-left">
     <!--transparent layer -->
     <div class="loginDiv">
-        <p th:text="#{register.tip}">Please sign up</p>
+        <p th:text="#{verify.tip}">Please verify your email</p>
         <!--form start-->
-        <form id="form-regis" class="form-horizontal" role="form">
+        <form id="form-verify" class="form-horizontal" role="form">
+
             <!--email-->
-            <div class="form-group">
-                <label class="col-md-3 control-label"th:text="#{login.email}"></label>
+            <div class="form-group ">
+                <label class="col-md-4 control-label" th:text="#{verify.email}">Send verification code to：</label>
                 <div class="col-md-8">
-                    <input name="email" type="text" class="form-control" th:placeholder="#{login.enterEmail}">
+                    <text name="email" type="text" th:text="${session.email}"></text>
                 </div>
             </div>
-            <!--password-->
+            <!--Verification code-->
             <div class="form-group">
-                <label class="col-md-3 control-label"th:text="#{login.password}"></label>
+                <label class="col-md-4 control-label" th:text="#{verify.code}"></label>
                 <div class="col-md-8">
-                    <input  name="password" type="password" class="form-control" th:placeholder="#{login.enterPassword}">
-                </div>
-            </div>
-            <!--confirm password -->
-            <div class="form-group">
-                <label class="col-md-3 control-label" th:text="#{register.confirmPassword}"></label>
-                <div class="col-md-8">
-                    <input  name="confirm_password" type="password" class="form-control" th:placeholder="#{register.repeatPassword}">
+                    <input  name="code" type="text" th:placeholder="#{verify.enterCode}">
+                    <button id="btn-send-code" type="button" class="btn btn-info btn-sm"th:text="#{verify.send}">Send</button>
                 </div>
             </div>
             <!--submit-->
             <div class="form-group">
-                <label class="col-md-3 control-label"></label>
+                <label class="col-md-4 control-label"></label>
                 <div class="col-md-8">
-                    <input id="btn-regis" class="btn btn-primary" th:value="#{register.signup}" type="button" value="Sign up" />
-                    <span class="pull-right"><small th:text="#{register.haveAccount}"></small><a href="/users/login.html" th:text="#{register.signin}"></a></span>
+                    <input id="btn-reset" class="btn btn-primary" th:value="#{verify.verify}" type="button" value="Verify" />
                 </div>
             </div>
         </form>
@@ -78,18 +72,42 @@
     </div>
 </footer>
 <!--footer end-->
-<script type="text/javascript">
-    // listen to login button
-    $("#btn-regis").click(function () {
+<script th:inline="javascript" type="text/javascript">
+    // listen to button
+    var email = [[${session.email}]];
+    //alert(email);
+    $("#btn-send-code").click(function () {
         $.ajax({
-            url: "/users/regis",
-            type: "POST",
-            data: $("#form-regis").serialize(),
+            url: "/users/code-reset?email="+email,
+            type: "GET",
+            async:false,
             dataType: "JSON",
             success: function (json){
                 if(json.state === 200) {
-                    alert("Regis Success");
-                    location.href = "/users/verify_regis.html"
+                    alert("Send Success");
+                }
+                else
+                    alert("Verify Failed: " + json.message)
+            },
+            error: function (xhr){
+                alert("Unknown Server Error!");
+            }
+        })
+    })
+
+    input_code = document.getElementsByName("code");
+    $("#btn-reset").click(function () {
+        //alert("input code:" + input_code);
+        $.ajax({
+            url: "/users/verify-reset?email="+email,
+            type: "POST",
+            data: $("#form-verify").serialize(),
+            //data:{},
+            dataType: "JSON",
+            success: function (json){
+                if(json.state === 200) {
+                    alert("Verify Success");
+                    location.href = "/users/change_password.html"
                 }
                 else
                     alert("Regis Failed: " + json.message)
