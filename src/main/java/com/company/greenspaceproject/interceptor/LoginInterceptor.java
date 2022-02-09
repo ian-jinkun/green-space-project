@@ -19,7 +19,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response,
                              Object handler) throws Exception {
-        Object obj = request.getSession().getAttribute("id");
+        Object obj = request.getSession().getAttribute("uid");
         if(obj == null) { // User didn't login, redirect to login.html
             response.sendRedirect("/users/login.html");
             // end after calling
