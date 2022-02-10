@@ -4,14 +4,48 @@
 <mapper namespace="com.company.greenspaceproject.dao.UserLoginMapper">
 
     <resultMap type="com.company.greenspaceproject.entity.UserLogin" id="UserLoginMap">
+        <id column="uid" property="uid"/>
     </resultMap>
 
     <!--id：Represents the method "findUserByEmail" in the UserLoginMapper interface-->
     <select id="findUserByEmail" resultMap="UserLoginMap">
-        SELECT email, password FROM green_space_club.user_login WHERE email = #{email}
+        SELECT * FROM green_space_club.user_login WHERE email = #{email}
     </select>
     <select id="findUserById" resultType="com.company.greenspaceproject.entity.UserLogin">
         SELECT * FROM green_space_club.user_login WHERE uid = #{uid}
     </select>
+
+    <select id="findUserByUid" resultMap="UserLoginMap">
+        SELECT * FROM green_space_club.user_login WHERE uid = #{uid}
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="uid">
+        INSERT INTO green_space_club.user_login (email, password, salt)
+            VALUE (#{email}, #{password}, #{salt})
+    </insert>
+
+    <update id="update">
+        UPDATE green_space_club.user_login
+        SET password = #{password}, salt = #{salt}, login_attempts = #{login_attempts}, locked = #{locked}, verification_code = #{verification_code}
+        WHERE uid = #{uid}
+    </update>
+
+    <update id="updateVerificationCode">
+        UPDATE green_space_club.user_login
+        SET verification_code = #{verification_code}
+        WHERE uid = #{uid}
+    </update>
+
+    <update id="updateLoginAttempts">
+        UPDATE green_space_club.user_login
+        SET login_attempts = #{login_attempts}
+        WHERE uid = #{uid}
+    </update>
+
+    <update id="updateLocked">
+        UPDATE green_space_club.user_login
+        SET locked = #{locked}
+        WHERE uid = #{uid}
+    </update>
 
 </mapper>

@@ -3,19 +3,20 @@ package com.company.greenspaceproject.entity;
 import java.io.Serializable;
 
 public class UserLogin implements Serializable {
-    private int id;
+    private int uid;
     private String email;
     private String password;
     private int locked;
     private int login_attempts;
     private String salt;
+    private String verification_code;
 
-    public int getId() {
-        return id;
+    public int getUid() {
+        return uid;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
     public void setEmail(String email) {
@@ -54,14 +55,22 @@ public class UserLogin implements Serializable {
         return salt;
     }
 
-    public void setSalt(int salt) {
+    public void setSalt(String salt) {
         this.salt = String.valueOf(salt);
+    }
+
+    public void setVerification_code(String verification_code) {
+        this.verification_code = verification_code;
+    }
+
+    public String getVerification_code() {
+        return verification_code;
     }
 
     @Override
     public String toString() {
         return "UserLogin{" +
-                "id=" + id +
+                "uid=" + uid +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", locked=" + locked +

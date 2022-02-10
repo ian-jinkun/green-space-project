@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.company.greenspaceproject.dao.RegisterMapper">
+
+    <resultMap type="com.company.greenspaceproject.entity.Register" id="RegisterMap">
+        <id column="rid" property="rid"/>
+    </resultMap>
+
+
+
+    <!--id：Represents the method "findUserByEmail" in the UserLoginMapper interface-->
+    <select id="findUserByEmail" resultMap="RegisterMap">
+        SELECT * FROM green_space_club.register WHERE email = #{email}
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="rid">
+        INSERT INTO green_space_club.register (email, password, salt)
+        VALUE (#{email}, #{password}, #{salt})
+    </insert>
+
+    <update id="update">
+        UPDATE green_space_club.register
+        SET password = #{password}, salt = #{salt}
+        WHERE rid = #{rid}
+    </update>
+
+    <update id="delete">
+        DELETE FROM green_space_club.register
+        WHERE rid = #{rid}
+    </update>
+
+    <update id="updateVerificationCode">
+        UPDATE green_space_club.register
+        SET verification_code = #{verification_code}
+        WHERE rid = #{rid}
+    </update>
+
+</mapper>
