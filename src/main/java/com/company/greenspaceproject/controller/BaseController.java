@@ -1,16 +1,11 @@
 package com.company.greenspaceproject.controller;
 
 import com.company.greenspaceproject.service.ex.*;
-<<<<<<< HEAD
-=======
-
->>>>>>> 800c95c59e59987d1ae646a82b21a90f39b046d1
 import com.util.JsonResult;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.servlet.http.HttpSession;
-import java.nio.file.AccessDeniedException;
 
 /** Base Controller class*/
 public class BaseController {
@@ -39,15 +34,14 @@ public class BaseController {
             result.setMessage("Email is empty!");
         }else if(e instanceof PasswordNullException){
             result.setState(4005);
-<<<<<<< HEAD
+
         } else if (e instanceof SessionNotFoundException){
             result.setState(3000);
-=======
+
             result.setMessage("Password is empty!");
         } else if (e instanceof ConfirmPasswordNotMatchException) {
             result.setState(4006);
             result.setMessage("Confirm password is not matched password!");
->>>>>>> 800c95c59e59987d1ae646a82b21a90f39b046d1
         }
         else if (e instanceof ConfirmPasswordNullException) {
             result.setState(4007);
