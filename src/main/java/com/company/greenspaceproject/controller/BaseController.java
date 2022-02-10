@@ -1,13 +1,8 @@
 package com.company.greenspaceproject.controller;
 
-import com.company.greenspaceproject.service.ex.EmailDuplicatedException;
-import com.company.greenspaceproject.service.ex.PasswordNotMatchException;
-import com.company.greenspaceproject.service.ex.ServiceException;
-
-import com.company.greenspaceproject.service.ex.UserNotFoundException;
+import com.company.greenspaceproject.service.ex.*;
 import com.util.JsonResult;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
-import org.apache.tomcat.util.http.fileupload.impl.FileUploadIOException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.servlet.http.HttpSession;
@@ -34,12 +29,14 @@ public class BaseController {
             result.setMessage("Password Not Match!");
         } else if (e instanceof AccessDeniedException) {
             result.setState(4005);
+        } else if (e instanceof SessionNotFoundException){
+            result.setState(3000);
         }
         return result;
     }
 
     protected final Integer getUidFromSession(HttpSession session){
-        return Integer.valueOf(session.getAttribute("id").toString());
+        return Integer.valueOf(session.getAttribute("uid").toString());
     }
 
     protected final String getEmailFromSession(HttpSession session){

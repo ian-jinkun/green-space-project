@@ -10,5 +10,8 @@
     <select id="findUserByEmail" resultMap="UserLoginMap">
         SELECT email, password FROM green_space_club.user_login WHERE email = #{email}
     </select>
+    <select id="findUserById" resultType="com.company.greenspaceproject.entity.UserLogin">
+        SELECT * FROM green_space_club.user_login WHERE uid = #{uid}
+    </select>
 
 </mapper>

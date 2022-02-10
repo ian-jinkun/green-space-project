@@ -62,6 +62,6 @@ public class MemberMapperTest {
 
     @Test
     void findMemberByUid() {
-        System.out.println(memberMapper.findMemberByUid(-1));
+        System.out.println(memberMapper.findMemberByUid(12));
     }
 }

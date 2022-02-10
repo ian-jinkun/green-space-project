@@ -20,4 +20,7 @@ public interface UserLoginMapper {
      */
     public Integer insert(UserLogin userLogin);
 
+
+    public UserLogin findUserById(Integer uid);
+
 }
