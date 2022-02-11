@@ -47,6 +47,6 @@ public class MemberServiceTest {
 
         System.out.println(member);
 
-        memberService.insertMember(member);
+//        memberService.insertMember(member);
     }
 }

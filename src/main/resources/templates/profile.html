@@ -108,30 +108,10 @@
     </div>
 </footer>
 <script type="text/javascript">
-    $("btn-add-new-profile").click(function () {
-        console.log($("#form-change-info").serialize());
-        $.ajax({
-            url: "/member/update_member",
-            type: "POST",
-            data: $("#form-change-info").serialize(),
-            dataType: "JSON",
-            success: function (json){
-                if(json.state === 200){
-                    alert("Profile Saved")
-                } else{
-                    alert("Profile Error")
-                }
-            },
-            error: function (xhr){
-                alert("Session Expired")
-                location.href = "login.html"
-            }
-        })
-    });
+    console.log("Hello World")
+
     let defaultOption = '<option value="0">----- Please Choose -----</option>';
-    $(document).ready(function () {
-        showMemberProfile();
-    });
+
     $("#country-list").click(function () {
         $('#state-list').empty();
         $('#state-list').append(defaultOption);
@@ -231,7 +211,32 @@
             }
         });
     }
-    console.log($("#form-change-info").serialize());
+    $("#btn-add-new-profile").click(function () {
+        alert($("#form-change-info").serialize())
+        $.ajax({
+            url: "/member/update_member",
+            type: "POST",
+            data: $("#form-change-info").serialize(),
+            dataType: "JSON",
+            success: function (json){
+                console.log(json.state)
+                if(json.state === 200){
+                    alert("Profile Saved")
+                    location.href = "/web/index.html"
+                } else{
+                    alert("Profile Error")
+                }
+            },
+            error: function (xhr){
+                alert("Session Expired")
+                location.href = "login.html"
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        showMemberProfile();
+    });
 
 </script>
 </body>

@@ -24,7 +24,7 @@ public class MemberMapperTest {
         member.setCity("Winnipeg");
         member.setAddress("173 Victor Lewis Dr");
         member.setZip("R3P 1Z9");
-        memberMapper.addMember(member);
+//        memberMapper.addMember(member);
     }
 
     @Test
@@ -56,8 +56,8 @@ public class MemberMapperTest {
                          String zip,
                          String address);
          */
-        System.out.println(memberMapper.updateMember(member.getMid(), member.getFirstName(), member.getLastName(), member.getMiddleName(), member.getGender(),member.getCountry(),
-                member.getState(), member.getCity(), member.getZip(), member.getAddress()));
+//        System.out.println(memberMapper.updateMember(member.getMid(), member.getFirstName(), member.getLastName(), member.getMiddleName(), member.getGender(),member.getCountry(),
+//                member.getState(), member.getCity(), member.getZip(), member.getAddress()));
     }
 
     @Test
