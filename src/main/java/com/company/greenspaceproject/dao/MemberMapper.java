@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface MemberMapper {
     Integer addMember(Member member);
 
-    Integer findMemberByUid(Integer uid);
+    Member findMemberByUid(Integer uid);
 
     Integer updateMember(Integer mid,
                          String firstName,

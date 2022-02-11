@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script type="text/jsx"  src="/bootstrap3/js/holder.js"></script>
+    <link href="/bootstrap3/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <script type="text/jsx" src="/bootstrap3/jquery-1.9.1.min.js"></script>
+    <script type="text/jsx" src="/bootstrap3/js/bootstrap.js"></script>
+    <!-- font -->
+    <link rel="stylesheet" href="/bootstrap3/font-awesome-4.7.0/css/font-awesome.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/top.css" />
+    <link rel="stylesheet" type="text/css" href="/css/index.css" />
+    <link rel="stylesheet" type="text/css" href="/css/layout.css" />
+    <link rel="stylesheet" type="text/css" href="/css/login.css" />
+    <link rel="stylesheet" type="text/css" href="/css/footer.css" />
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+    <script src="/bootstrap3/js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/autoLogin.js" type="text/javascript"></script>
+</head>
+<body>
+<div class="row clearfix">
+    <div th:replace="commons/bar::#topbar"></div>
+</div>
+<div>
+    <h2>
+        Green Space Club Member Profile
+    </h2>
+    <form id="form-change-info" class="form-horizontal" role="form">
+        <div class="form-group">
+            <label class="col-md-2 control-label"><span class="txtred">*</span>First Name：</label>
+            <div class="col-md-1">
+                <input id="firstName" name="firstName" type="text" class="form-control" placeholder="First Name" value="">
+            </div>
+            <label class="col-md-2 control-label"><span class="txtred"></span>Middle Name：</label>
+            <div class="col-md-1">
+                <input id="middleName" name="middleName" type="text" class="form-control" placeholder="Middle Name" value="">
+            </div>
+            <label class="col-md-2 control-label"><span class="txtred">*</span>Last Name：</label>
+            <div class="col-md-1">
+                <input id="lastName" name="lastName" type="text" class="form-control" placeholder="Last Name" value="">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Gender：</label>
+            <div class="col-md-8">
+                <label class="radio-inline">
+                    <input id="gender-male" type="radio" name="gender" value="1">Male
+                </label>
+                <label class="radio-inline">
+                    <input id="gender-female" type="radio" name="gender" value="0">Female
+                </label>
+            </div>
+        </div>
+
+        <div class="address_content" data-toggle="distpicker">
+            <div class="form-group">
+                <label class="col-md-2 control-label"><span class="txtred">*</span>Country：</label>
+                <div class="col-md-3">
+                    <select id="country-list" name="country" class="form-control" data-province="---- country ----">
+                      <option value="CA">CA</option>
+                        <option value="US">US</option>
+                    </select>
+                </div>
+                <label class="col-md-2 control-label"><span class="txtred">*</span>Province/States：</label>
+                <div class="col-md-3">
+                    <select id="state-list" name="state" class="form-control" data-city="---- province/state ----" value=""></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label"><span class="txtred">*</span>City：</label>
+                <div class="col-md-3">
+                    <select id="city-list" name="city" class="form-control" data-district="---- city ----" value=""></select>
+                </div>
+                <label class="col-md-2 control-label">Postal Code：</label>
+                <div class="col-md-3">
+                    <input id="zip" name="zip" type="text" class="form-control" placeholder="Postal Code" value="">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label"><span class="txtred">*</span>Address：</label>
+            <div class="col-md-8">
+                <input id="address" name="address" class="form-control" rows="3" placeholder="Enter your address" value=""/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label"><a href="/web/index.html">Return</a>&nbsp;&nbsp;&nbsp;</label>
+            <div class="col-sm-10">
+                <input id="btn-add-new-profile" type="submit" class="col-md-1 btn btn-primary" value="Save" />
+                <input type="reset" class="col-md-offset-1 col-md-1 btn btn-primary" value="Reset" />
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<footer class="footer">
+    <!-- page bottom #footer -->
+    <div class="col-md-12 text-center bottom">
+        Copyright © 2021-2022<a target="_blank"> Green Space Club</a>
+    </div>
+</footer>
+<script type="text/javascript">
+    $("btn-add-new-profile").click(function () {
+        console.log($("#form-change-info").serialize());
+        $.ajax({
+            url: "/member/update_member",
+            type: "POST",
+            data: $("#form-change-info").serialize(),
+            dataType: "JSON",
+            success: function (json){
+                if(json.state === 200){
+                    alert("Profile Saved")
+                } else{
+                    alert("Profile Error")
+                }
+            },
+            error: function (xhr){
+                alert("Session Expired")
+                location.href = "login.html"
+            }
+        })
+    });
+    let defaultOption = '<option value="0">----- Please Choose -----</option>';
+    $(document).ready(function () {
+        showMemberProfile();
+    });
+    $("#country-list").click(function () {
+        $('#state-list').empty();
+        $('#state-list').append(defaultOption);
+        showStateList();
+    })
+    $("#country-list").change(function () {
+        showStateList();
+    });
+
+    function showStateList(){
+        $("#state-list").empty();
+        let country = $("#country-list").val();
+        $("#city-list").empty();
+        $("#city-list").append(defaultOption);
+
+        console.log(country);
+
+        $.ajax({
+            url: "/districts/get_states",
+            data: "country=" + country,
+            type: "GET",
+            dataType: "JSON",
+            success: function (json){
+                let list = json.data;
+                console.log("count = " + list.length);
+
+                for (let i = 0; i < list.length; i++) {
+                    console.log(list[i]);
+                    let option = '<option value="' + list[i] + '">' + list[i] + '</option>';
+                    $("#state-list").append(option);
+                }
+            },
+            error: function (xhr){
+                console.log(this.url)
+                alert("Get country failed")
+            }
+        })
+        showCityList();
+    }
+    $("#state-list").change(function () {
+        showCityList()
+    });
+    function showCityList() {
+        let state = $("#state-list").val();
+        console.log(state);
+        $.ajax({
+            url: "/districts/get_cities",
+            type: "GET",
+            data: "state=" + state,
+            dataType: "JSON",
+            success: function (json){
+                if (json.state === 200) {
+                    let list = json.data;
+                    console.log("count=" + list.length);
+                    for (let i = 0; i < list.length; i++) {
+                        console.log(list[i]);
+                        let option = '<option value="' + list[i] + '">' + list[i] + '</option>';
+                        $("#city-list").append(option);
+                    }
+                }
+            }
+        })
+    }
+
+    function showMemberProfile(){
+        $.ajax({
+            url: "/member/get_member_by_uid",
+            type: "GET",
+            dataType: "JSON",
+            success: function (json){
+                if(json.state === 200){
+                    console.log("firstName = " + json.data.firstName);
+                    console.log("lastName = " + json.data.lastName);
+                    console.log("middleName = " + json.data.middleName);
+                    console.log("gender = " + json.data.gender);
+                    console.log("country = " + json.data.country);
+                    console.log("state = " + json.data.state);
+                    console.log("city = " + json.data.city);
+                    console.log("zip = " + json.data.zip);
+                    console.log("address = " + json.data.address);
+
+                    $('#firstName').val(json.data.firstName);
+                    $('#lastName').val(json.data.lastName);
+                    $('#middleName').val(json.data.middleName);
+                    $('#country-list').val(json.data.country);
+                    $('#state-list').append('<option value="'+ json.data.state + '">'+ json.data.state + '</option>')
+                    $('#city-list').append('<option value="'+ json.data.city + '">'+ json.data.city + '</option>');
+                    $('#zip').val(json.data.zip);
+                    $('#address').val(json.data.address);
+
+
+                    let radio = json.data.gender === 0 ? $("#gender-female") : $("#gender-male");
+                    radio.prop("checked", "checked")
+
+
+                }
+            }
+        });
+    }
+    console.log($("#form-change-info").serialize());
+
+</script>
+</body>
+
+</html>

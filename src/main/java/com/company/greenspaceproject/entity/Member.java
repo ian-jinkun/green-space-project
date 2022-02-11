@@ -50,7 +50,7 @@ public class Member implements Serializable {
         return mid;
     }
 
-    public void setMid(int mid) {
+    public void setMid(Integer mid) {
         this.mid = mid;
     }
 
@@ -58,7 +58,7 @@ public class Member implements Serializable {
         return uid;
     }
 
-    public void setUid(int uid) {
+    public void setUid(Integer uid) {
         this.uid = uid;
     }
 

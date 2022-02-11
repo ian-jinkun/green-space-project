@@ -33,15 +33,25 @@ public class MemberController extends BaseController{
         if(user == null)
             throw new SessionNotFoundException("Session Expired");
         member.setUid(uid);
-        Integer mid = memberMapper.findMemberByUid(uid);
-        if(mid == null) {
+//        Integer mid = memberMapper.findMemberByUid(uid);
+//        if(mid == null) {
+//            memberService.insertMember(member);
+//        }
+        Member findMember = memberMapper.findMemberByUid(uid);
+        if(findMember == null){
             memberService.insertMember(member);
         }
         else {
-            member.setMid(mid);
+            member.setMid(findMember.getMid());
             memberService.updateMember(member);
         }
         return new JsonResult<>(OK);
 
+    }
+    @RequestMapping("get_member_by_uid")
+    public JsonResult<Member> getMemberByUid(HttpSession session){
+        Member data = memberService.getMemberByUid(getUidFromSession(session));
+
+        return new JsonResult<>(OK, data);
     }
 }

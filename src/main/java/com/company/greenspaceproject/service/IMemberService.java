@@ -6,4 +6,5 @@ import com.company.greenspaceproject.entity.Member;
 public interface IMemberService {
     public void updateMember(Member member);
     public void insertMember(Member member);
+    public Member getMemberByUid(Integer uid);
 }

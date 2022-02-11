@@ -46,6 +46,7 @@ public class LoginInterceptorConfigurer implements WebMvcConfigurer {
         patterns.add("/users/forget-password");
         patterns.add("/users/change_password");
         patterns.add("/users/change_password.html");
+        patterns.add("/users/profile.html");
         // register interceptor complete
         interceptorRegistry.addInterceptor(interceptor).addPathPatterns("/**").excludePathPatterns(patterns); // Intercept URLs /** means all URLs.
 
